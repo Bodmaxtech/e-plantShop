@@ -1,7 +1,22 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
+import { useDispatch } from 'react-redux'; // Import dispatch from redux
+import { addItem } from './CartSlice'; // Import the addItem reducer
+
+
+
 function ProductList() {
+    const [addedToCart, setAddedToCart] = useState({});
+    const dispatch = useDispatch();
+
+const handleAddToCart = (plant) => {
+  dispatch(addItem(plant)); // Dispatch plant data to the global cart
+  setAddedToCart((prevState) => ({
+    ...prevState,
+    [plant.name]: true, // Update state to mark the plant as added
+  }));
+};
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
 
@@ -268,9 +283,30 @@ const handlePlantsClick = (e) => {
         </div>
         {!showCart? (
         <div className="product-grid">
-
-
-        </div>
+        {plantsArray.map((category, index) => (
+          <div key={index}>
+            <h1><div>{category.category}</div></h1> {/* Display plant category */}
+            <div className="product-list">
+              {category.plants.map((plant, plantIndex) => (
+                <div className="product-card" key={plantIndex}>
+                  <img className="product-image" src={plant.image} alt={plant.name} /> {/* Display image */}
+                  <div className="product-title">{plant.name}</div> {/* Display name */}
+                  <div className="product-description">{plant.description}</div> {/* Display description */}
+                  <div className="product-cost">Cost: ${plant.cost}</div> {/* Display cost */}
+                  <button
+                  className="product-button"
+                  onClick={() => handleAddToCart(plant)}
+                  disabled={addedToCart[plant.name]} // Disable button if already added
+                  >
+                    {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
+                    </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      
  ) :  (
     <CartItem onContinueShopping={handleContinueShopping}/>
 )}
