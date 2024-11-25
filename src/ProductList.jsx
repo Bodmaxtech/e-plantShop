@@ -17,6 +17,8 @@ const handleAddToCart = (plant) => {
     [plant.name]: true, // Update state to mark the plant as added
   }));
 };
+
+
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
 
