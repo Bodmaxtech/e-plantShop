@@ -266,7 +266,7 @@ function ProductList() {
             <img
               src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png"
               alt="Paradise Nursery Logo"
-              className="brand-image"
+              className="Luxury"
             />
             <a href="/" style={{ textDecoration: 'none' }}>
               <div className="brand-text">
@@ -286,13 +286,12 @@ function ProductList() {
         <div>
           <a href="#" onClick={toggleCartVisibility} className="nav-link">
             <h1 className="cart-icon">
-              <img
-                src="https://cdn.pixabay.com/photo/2016/03/31/19/58/shopping-cart-1295256_1280.png"
-                alt="Cart Icon"
-                className="cart-icon-image"
-                width="68"
-                height="68"
-              />
+            <img
+            src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png"
+            alt="Paradise Nursery Logo"
+            className="brand-image"
+            style={{ width: '68px', height: '68px', objectFit: 'cover' }} // Thumbnail size
+            />
             </h1>
           </a>
         </div>
