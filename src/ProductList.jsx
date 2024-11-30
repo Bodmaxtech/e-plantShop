@@ -9,8 +9,6 @@ function ProductList() {
     const [showCart, setShowCart] = useState(false); // State to toggle cart visibility
     const dispatch = useDispatch();
 
-   
-
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -98,14 +96,14 @@ function ProductList() {
             category: "Insect Repellent Plants",
             plants: [
                 {
-                    name: "oregano",
+                    name: "Oregano",
                     image: "https://cdn.pixabay.com/photo/2015/05/30/21/20/oregano-790702_1280.jpg",
-                    description: "The oregano plants contains compounds that can deter certain insects.",
+                    description: "Contains compounds that deter certain insects.",
                     cost: "$10"
                 },
                 {
                     name: "Marigold",
-                    image:"https://cdn.pixabay.com/photo/2022/02/22/05/45/marigold-7028063_1280.jpg",
+                    image: "https://cdn.pixabay.com/photo/2022/02/22/05/45/marigold-7028063_1280.jpg",
                     description: "Natural insect repellent, also adds color to the garden.",
                     cost: "$8"
                 },
@@ -182,182 +180,85 @@ function ProductList() {
                 {
                     name: "ZZ Plant",
                     image: "https://images.unsplash.com/photo-1632207691143-643e2a9a9361?q=80&w=464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    description: "Thrives in low light and requires minimal watering.",
-                    cost: "$25"
-                },
-                {
-                    name: "Pothos",
-                    image: "https://cdn.pixabay.com/photo/2018/11/15/10/32/plants-3816945_1280.jpg",
-                    description: "Tolerates neglect and can grow in various conditions.",
-                    cost: "$10"
+                    description: "Thrives in low light and requires little water.",
+                    cost: "$15"
                 },
                 {
                     name: "Snake Plant",
                     image: "https://cdn.pixabay.com/photo/2021/01/22/06/04/snake-plant-5939187_1280.jpg",
-                    description: "Needs infrequent watering and is resilient to most pests.",
+                    description: "Tolerant of neglect, requiring minimal care.",
                     cost: "$15"
                 },
                 {
-                    name: "Cast Iron Plant",
-                    image: "https://cdn.pixabay.com/photo/2017/02/16/18/04/cast-iron-plant-2072008_1280.jpg",
-                    description: "Hardy plant that tolerates low light and neglect.",
-                    cost: "$20"
+                    name: "Spider Plant",
+                    image: "https://cdn.pixabay.com/photo/2018/07/11/06/47/chlorophytum-3530413_1280.jpg",
+                    description: "Grows easily in low light with minimal care.",
+                    cost: "$12"
                 },
                 {
-                    name: "Succulents",
-                    image: "https://cdn.pixabay.com/photo/2016/11/21/16/05/cacti-1846147_1280.jpg",
-                    description: "Drought-tolerant plants with unique shapes and colors.",
-                    cost: "$18"
+                    name: "Pothos",
+                    image: "https://cdn.pixabay.com/photo/2016/11/19/21/31/pothos-1836896_1280.jpg",
+                    description: "Easy to grow in a variety of light conditions.",
+                    cost: "$12"
                 },
                 {
-                    name: "Aglaonema",
-                    image: "https://cdn.pixabay.com/photo/2014/10/10/04/27/aglaonema-482915_1280.jpg",
-                    description: "Requires minimal care and adds color to indoor spaces.",
-                    cost: "$22"
+                    name: "Aloe Vera",
+                    image: "https://cdn.pixabay.com/photo/2018/04/02/07/42/leaf-3283175_1280.jpg",
+                    description: "Low-maintenance succulent with air-purifying benefits.",
+                    cost: "$14"
+                },
+                {
+                    name: "Cactus",
+                    image: "https://cdn.pixabay.com/photo/2017/05/11/20/44/cactus-2308234_1280.jpg",
+                    description: "Requires minimal watering and thrives in dry conditions.",
+                    cost: "$10"
                 }
             ]
         }
     ];
-   const styleObj={
-    backgroundColor: '#4CAF50',
-    color: '#fff!important',
-    padding: '15px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignIems: 'center',
-    fontSize: '20px',
-   }
-   const styleObjUl={
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '1100px',
-   }
-   const styleA={
-    color: 'white',
-    fontSize: '30px',
-    textDecoration: 'none',
-   }
 
-   // Function to handle adding items to the cart
-  const handleAddToCart = (plant) => {
-    setAddedToCart((prevState) => ({
-      ...prevState,
-      [plant.name]: true,
-    }));
-  };
+    // Toggle cart visibility function
+    const toggleCart = () => {
+        setShowCart(!showCart);
+    };
 
-  // Function to toggle cart visibility
-  const toggleCartVisibility = () => {
-    setShowCart(!showCart);
-  };
+    const addToCart = (plant) => {
+        setAddedToCart((prev) => ({
+            ...prev,
+            [plant.name]: true
+        }));
+        dispatch(addItem(plant)); // Dispatch addItem action to store
+    };
 
-  // Function to handle continue shopping button
-  const handleContinueShopping = () => {
-    setShowCart(false);
-  };
-
-  const ProductList = () => {
     return (
-      <div>
-        {/* Navbar Section */}
-        <div className="navbar" style={styleObj}>
-          <div className="navbar-container">
-            {/* Logo Section */}
-            <div className="luxury">
-              <img
-                src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png"
-                alt="Paradise Nursery Logo"
-                className="brand-image"
-                style={{ width: '68px', height: '68px', objectFit: 'cover' }} // Thumbnail size
-              />
-              <a href="/" style={{ textDecoration: 'none' }}>
-                <div>
-                  <h3 style={{ color: 'white' }}>Paradise Nursery</h3>
-                  <i style={{ color: 'white' }}>Where Green Meets Serenity</i>
-                </div>
-              </a>
-            </div>
-          </div>
-  
-          {/* Navigation Links */}
-          <div style={styleObjUl}>
-            {/* Plants Link */}
-            <div>
-              <a href="#" onClick={(e) => handlePlantsClick(e)} style={styleA}>
-                Plants
-              </a>
-            </div>
-  
-            {/* Cart Link */}
-            <div>
-              <a href="#" onClick={(e) => handleCartClick(e)} style={styleA}>
-                <h1 className="cart">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 256 256"
-                    id="IconChangeColor"
-                    height="68"
-                    width="68"
-                  >
-                    <rect width="156" height="156" fill="none"></rect>
-                    <circle cx="80" cy="216" r="12"></circle>
-                    <circle cx="184" cy="216" r="12"></circle>
-                    <path
-                      d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8"
-                      fill="none"
-                      stroke="#faf9f9"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      id="mainIconPathAttribute"
-                    ></path>
-                  </svg>
-                </h1>
-              </a>
-            </div>
-          </div>
-        </div>
-  
-        {/* Product List or Cart Section */}
-        {!showCart ? (
-          <div className="product-grid">
-            {plantsArray.map((category, index) => (
-              <div key={index} className="product-category">
-                <h1 className="category-title">{category.category}</h1>
-                <div className="product-list">
-                  {category.plants.map((plant, plantIndex) => (
-                    <div className="product-card" key={plantIndex}>
-                      <img
-                        className="product-image"
-                        src={plant.image}
-                        alt={plant.name}
-                      />
-                      <div className="product-title">{plant.name}</div>
-                      <div className="product-description">{plant.description}</div>
-                      <div className="product-cost">Cost: ${plant.cost}</div>
-                      <button
-                        className="product-button"
-                        onClick={() => handleAddToCart(plant)}
-                        disabled={addedToCart[plant.name]}
-                      >
-                        {addedToCart[plant.name]
-                          ? 'Added to Cart'
-                          : 'Add to Cart'}
-                      </button>
+        <div className="product-list">
+            <div className="category-container">
+                {plantsArray.map((category, index) => (
+                    <div key={index}>
+                        <h2>{category.category}</h2>
+                        <div className="plants-container">
+                            {category.plants.map((plant, i) => (
+                                <div key={i} className="plant-card">
+                                    <img src={plant.image} alt={plant.name} />
+                                    <h3>{plant.name}</h3>
+                                    <p>{plant.description}</p>
+                                    <p>{plant.cost}</p>
+                                    <button
+                                        onClick={() => addToCart(plant)}
+                                        disabled={addedToCart[plant.name]}
+                                    >
+                                        {addedToCart[plant.name] ? "Added to Cart" : "Add to Cart"}
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <CartItem onContinueShopping={handleContinueShopping} />
-        )}
-      </div>
+                ))}
+            </div>
+            <button onClick={toggleCart}>Toggle Cart</button>
+            {showCart && <CartItem />}
+        </div>
     );
-  };
-};
-  
-  export default ProductList;
-  
+}
+
+export default ProductList;
