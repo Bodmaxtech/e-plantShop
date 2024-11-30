@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addItem } from './actions'; // Assuming you have an action to handle adding items to the cart
-import CartItem from './CartItem'; // Assuming CartItem is a component showing cart details
+import { addItem } from './CartSlice'; 
+import CartItem from './CartItem'; 
 
 function ProductList() {
     const [addedToCart, setAddedToCart] = useState({});
