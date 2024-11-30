@@ -230,7 +230,81 @@ function ProductList() {
         dispatch(addItem(plant)); // Dispatch addItem action to store
     };
 
+        // Styling Objects
+    const styleObjUl = {
+        listStyleType: "none",
+        padding: 0,
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+        gap: "20px",
+    };
+
+    const styleObj = {
+        border: "1px solid #ccc",
+        borderRadius: "8px",
+        padding: "20px",
+        textAlign: "center",
+        backgroundColor: "#f9f9f9",
+    };
+
+    const styleA = {
+        textDecoration: "none",
+        color: "#333",
+    };
+
+    const buttonStyle = {
+        backgroundColor: "#e74c3c",
+        color: "white",
+        border: "none",
+        padding: "10px 20px",
+        borderRadius: "5px",
+        cursor: "pointer",
+        fontSize: "1rem",
+        transition: "background-color 0.3s",
+      };
+    
+      const buttonHoverStyle = {
+        backgroundColor: "#c0392b",
+      };
+
+
     return (
+
+        <div className="product-list-container" style={{ padding: "20px" }}>
+      <ul style={styleObjUl}>
+        {products.map((product) => (
+          <li key={product.id} style={styleObj}>
+            <a href={`/product/${product.id}`} style={styleA}>
+              <img
+                src={product.image}
+                alt={product.name}
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                  marginBottom: "10px",
+                }}
+              />
+              <h2 style={{ fontSize: "1.5rem", margin: "10px 0" }}>{product.name}</h2>
+              <p style={{ fontSize: "1rem", color: "#777" }}>{product.description}</p>
+              <p style={{ color: "#e74c3c", fontSize: "1.2rem", margin: "10px 0" }}>
+                ${product.price}
+              </p>
+              <button
+                className="product-button"
+                style={buttonStyle}
+                onMouseOver={(e) => (e.target.style.backgroundColor = buttonHoverStyle.backgroundColor)}
+                onMouseOut={(e) => (e.target.style.backgroundColor = "#e74c3c")}
+              >
+                Add to Cart
+              </button>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+        
         <div className="product-list">
             <div className="category-container">
                 {plantsArray.map((category, index) => (
